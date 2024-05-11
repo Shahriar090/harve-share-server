@@ -147,7 +147,25 @@ async function run() {
       }
     });
 
-    // update post
+    // get a single post
+
+    app.get("/api/v1/posts/:id", async (req, res) => {
+      try {
+        const id = req.params.id;
+
+        const query = { _id: new ObjectId(id) };
+        const result = await postCollection.findOne(query);
+        if (!result) {
+          return res.status(404).send("Post not found");
+        }
+        res.send(result);
+      } catch (error) {
+        console.error("Error fetching post:", error);
+        res.status(500).send("Internal Server Error");
+      }
+    });
+
+    // update post api
 
     app.put("/api/v1/posts/:id", async (req, res) => {
       const id = req.params.id;
@@ -163,7 +181,7 @@ async function run() {
           description: updatedPost.description,
         },
       };
-      const result = await postCollection.updateOne(filter, options, post);
+      const result = await postCollection.updateOne(filter, post, options);
       res.send(result);
     });
 
