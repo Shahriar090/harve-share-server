@@ -14,8 +14,7 @@
   ],
   "headers": [
     {
-      "key": "Access-Control-Allow-Origin",
-      "value": "https://spontaneous-bonbon-1ce427.netlify.app"
+      "Access-Control-Allow-Origin": "https://spontaneous-bonbon-1ce427.netlify.app"
     }
   ]
 }
